@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script >
+        fetch("content/read.txt")
+        .then((response)=>{
+            return response.text();
+        })
+        .then((data)=>{
+            //console.log(data)
+            document.write(data)
+        })
+
+// fetch data using await
+        async function func() {
+            // // const dataInRes = await fetch('https://jsonplaceholder.typicode.com/users')
+            // // const u = await dataInRes.json();
+            // //return u
+            return (await fetch('https://jsonplaceholder.typicode.com/users')).json();
+        }
+        func().then(data => {
+            for (let x in data) {
+                fi = `${data[x].name} - ${data[x].address.city} <br>`;
+                document.write(fi)
+                console.log(x)
+            }
+        }).catch((error) => console.log(error))
+
+       
+// fetch data using then FROM LOCAL API
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then((response) => { return response.json() })
+            .then(data => {
+                for (let x in data) {
+                    fi = `${data[x].name} - ${data[x].address.city} <br>`;
+                    document.write(fi)
+                    console.log(x)
+                }
+            }).catch((error) => console.log(error))
+
+// POST DATA USING FETCH
+        fetch('https://jsonplaceholder.typicode.com/users', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: 1,
+                name: 'Nabeel',
+                username: 'Arsalan',
+                email:'arsalan7@gmail.com'
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
+// destructring of object 
+        const a = {
+            name:"nabeel",
+            age:"26",
+            skill:"web development"
+        };
+        console.log("using with es5 method "+" "+a.name,a.age,a.skill)
+       
+        const {name,age,skill} = a;
+           console.log("using with es6 method "+" "+name,age,skill);
+
+// arrow function
+        const func = (a,b)=>sum = a+ b;
+        console.log("arrow function"+func(3,4));
+
+//  MAP
+        let arr = [1, 4, 9, 3]; 
+        let mapResult = arr.map((elem)=>{
+            return elem * 2;
+        })
+        console.log(mapResult)
+
+// REDUCE    
+        let n = [4, 4, 6, 2]; 
+        let reduceResult = n.reduce((total, value, index, array)=>{
+                total += value;       
+                return (total/array.length)
+        },0)
+        console.log("avarage"+reduceResult)
+
+// FOREACH
+        let f = [4,3, 6, 2]; 
+        f.forEach((value,index,array) =>{
+            console.log(value*2)
+        })
+
+// FILTER
+        const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+                const result = words.filter(value => value.length > 6);
+                console.log(result);
+
+        
+        
+    </script>
+</body>
+</html>
